@@ -26,8 +26,12 @@ class MainActivity : ComponentActivity() {
             ScoutemoveTheme {
                 val state = networkObserver.observe().collectAsState(initial = Status.AVAILABLE)
                 when {
-                    state.value == Status.AVAILABLE -> { WebViewScreen() }
-                    else -> { NoInternetScreen()
+                    state.value == Status.AVAILABLE -> {
+                        WebViewScreen()
+                    }
+
+                    else -> {
+                        NoInternetScreen()
                         NoInternetDialog()
                     }
                 }
