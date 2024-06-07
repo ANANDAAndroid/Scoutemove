@@ -15,6 +15,8 @@ class NetworkObserver(context: Context) : ConnectivityObserver {
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+    internal fun isActuallyConnected() = connectivityManager.activeNetwork != null
+
     override fun observe(): Flow<Status> {
         return callbackFlow {
             val callback = object : NetworkCallback() {

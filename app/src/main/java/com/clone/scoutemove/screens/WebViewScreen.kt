@@ -55,7 +55,7 @@ fun WebViewScreen(url: String = Constants.URL) {
 
         if (loadingPercentage.intValue < 100 && shouldShowLoading.value) {
             Text(
-                text = "Loading..." + loadingPercentage.intValue.toString(),
+                text = "Loading..." + loadingPercentage.intValue.toString() + "%",
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(),

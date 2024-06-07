@@ -18,10 +18,16 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,9 +39,10 @@ import com.clone.scoutemove.ui.theme.Purple40
 import com.clone.scoutemove.ui.theme.Purple80
 import com.clone.scoutemove.ui.theme.PurpleGrey40
 
-@Preview(showSystemUi = true)
+
 @Composable
-fun NoInternetScreen() {
+fun NoInternetScreen(onClick: () -> Unit) {
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,7 +70,7 @@ fun NoInternetScreen() {
             color = Color.Red
         )
         Button(
-            onClick = { },
+            onClick = { onClick() },
             modifier = Modifier
                 .fillMaxWidth(0.8f),
             colors = ButtonDefaults.buttonColors().copy(containerColor = Color.Red)
@@ -71,13 +78,16 @@ fun NoInternetScreen() {
             Text(text = "Try again")
         }
     }
+
 }
 
-@Preview(showSystemUi = true)
+
 @Composable
-fun NoInternetDialog() {
+fun NoInternetDialog(onClick: () -> Unit) {
     Box {
-        Dialog(onDismissRequest = { }) {
+        Dialog(onDismissRequest = {
+
+        }) {
             Column(
                 modifier = Modifier
                     .background(Color.White, shape = RoundedCornerShape(5.dp))
@@ -106,10 +116,11 @@ fun NoInternetDialog() {
                     text = "Please check your internet connection",
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center,
+                    style = TextStyle().copy(platformStyle = PlatformTextStyle(includeFontPadding = false)),
                     color = Color.Black
                 )
                 Button(
-                    onClick = { },
+                    onClick = { onClick() },
                     modifier = Modifier,
                     contentPadding = PaddingValues(horizontal = 30.dp),
                     shape = RoundedCornerShape(5.dp),
