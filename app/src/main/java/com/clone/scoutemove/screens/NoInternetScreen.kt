@@ -1,5 +1,13 @@
 package com.clone.scoutemove.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,13 +19,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,14 +38,12 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.clone.scoutemove.R
 import com.clone.scoutemove.ui.theme.Purple40
-import com.clone.scoutemove.ui.theme.Purple80
-import com.clone.scoutemove.ui.theme.PurpleGrey40
 
 
 @Composable
@@ -83,52 +89,108 @@ fun NoInternetScreen(onClick: () -> Unit) {
 
 
 @Composable
-fun NoInternetDialog(onClick: () -> Unit) {
-    Box {
+fun NoInternetAnimatedDialog(visible: Boolean, onDismiss: () -> Unit) {
+
+    var showAnimatedDialog by rememberSaveable { mutableStateOf(false) }
+
+    LaunchedEffect(
+        key1 = visible,
+        block = {
+            if (visible) showAnimatedDialog = true
+        }
+    )
+
+    if (showAnimatedDialog) {
         Dialog(onDismissRequest = {
 
-        }) {
-            Column(
-                modifier = Modifier
-                    .background(Color.White, shape = RoundedCornerShape(5.dp))
-                    .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+        }, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Image(
-                    modifier = Modifier.size(40.dp),
-                    alignment = Alignment.Center,
-                    painter = painterResource(id = R.drawable.ic_close),
-                    contentDescription = "no internet"
+                var animate by rememberSaveable { mutableStateOf(false) }
+                LaunchedEffect(
+                    key1 = Unit,
+                    block = {
+                        animate = true
+                    }
                 )
-                Text(
-                    modifier = Modifier,
-                    text = "Oops...",
-                    fontSize = 16.sp,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Medium
-                )
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 7.dp)
-                        .width(200.dp),
-                    text = "Please check your internet connection",
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center,
-                    style = TextStyle().copy(platformStyle = PlatformTextStyle(includeFontPadding = false)),
-                    color = Color.Black
-                )
-                Button(
-                    onClick = { onClick() },
-                    modifier = Modifier,
-                    contentPadding = PaddingValues(horizontal = 30.dp),
-                    shape = RoundedCornerShape(5.dp),
-                    colors = ButtonDefaults.buttonColors().copy(containerColor = Purple40)
+
+                AnimatedVisibility(
+                    visible = animate && visible,
+                    enter = fadeIn(
+                        animationSpec = spring(
+                            stiffness = Spring.StiffnessHigh
+                        )
+                    ) + scaleIn(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessMediumLow
+                        )
+                    ),
+                    exit = slideOutVertically { it / 8 } + fadeOut() + scaleOut(
+                        targetScale = 0.95F
+                    )
                 ) {
-                    Text(text = "Ok")
+
+                    Column(
+                        modifier = Modifier
+                            .background(Color.White, shape = RoundedCornerShape(5.dp))
+                            .padding(20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            modifier = Modifier.size(40.dp),
+                            alignment = Alignment.Center,
+                            painter = painterResource(id = R.drawable.ic_close),
+                            contentDescription = "no internet"
+                        )
+                        Text(
+                            modifier = Modifier,
+                            text = "Oops...",
+                            fontSize = 16.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Medium
+                        )
+                        Text(
+                            modifier = Modifier
+                                .padding(vertical = 7.dp)
+                                .width(200.dp),
+                            text = "Please check your internet connection",
+                            fontSize = 12.sp,
+                            textAlign = TextAlign.Center,
+                            style = TextStyle().copy(
+                                platformStyle = PlatformTextStyle(
+                                    includeFontPadding = false
+                                )
+                            ),
+                            color = Color.Black
+                        )
+                        Button(
+                            onClick = { onDismiss() },
+                            modifier = Modifier,
+                            contentPadding = PaddingValues(horizontal = 30.dp),
+                            shape = RoundedCornerShape(5.dp),
+                            colors = ButtonDefaults.buttonColors().copy(containerColor = Purple40)
+                        ) {
+                            Text(text = "Ok")
+                        }
+                    }
+
+                    DisposableEffect(
+                        key1 = Unit,
+                        effect = {
+                            onDispose {
+                                showAnimatedDialog = false
+                            }
+                        }
+                    )
                 }
             }
         }
     }
 }
+
+
