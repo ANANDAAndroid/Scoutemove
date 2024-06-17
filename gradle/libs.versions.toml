@@ -1,15 +1,18 @@
 [versions]
-agp = "8.4.2"
-kotlin = "1.9.0"
+agp = "8.5.0"
+kotlin = "1.9.23"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.8.1"
+lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
-composeBom = "2024.05.00"
+composeBom = "2024.06.00"
 splashscreen = "1.0.1"
-hilt = "2.51"
+hilt = "2.51.1"
+lifecycle_version="2.8.2"
+nav_version="2.7.7"
+hilt_navigation="1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +32,11 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen" ,version.ref="splashscreen" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android" ,version.ref="hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler" ,version.ref="hilt" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose" ,version.ref="lifecycle_version" }
+lifecycle-compiler = { group = "androidx.lifecycle", name = "lifecycle-compiler" ,version.ref="lifecycle_version" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose" ,version.ref="nav_version" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose" ,version.ref="hilt_navigation" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

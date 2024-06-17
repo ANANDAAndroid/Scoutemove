@@ -26,9 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview(showSystemUi = true)
 @Composable
-private fun AuthScreen() {
+ fun AuthScreen(onClick:()-> Unit) {
     var userName by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     Column(
@@ -71,7 +70,7 @@ private fun AuthScreen() {
             )
         )
         Button(
-            onClick = { /*TODO*/ }, modifier = Modifier
+            onClick = { onClick() }, modifier = Modifier
                 .padding(top = 10.dp)
                 .fillMaxWidth()
                 .height(50.dp),
