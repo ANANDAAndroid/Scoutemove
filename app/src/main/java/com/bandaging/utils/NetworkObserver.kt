@@ -1,4 +1,4 @@
-package com.clone.scoutemove.utils
+package com.bandaging.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

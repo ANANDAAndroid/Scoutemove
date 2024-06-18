@@ -1,4 +1,4 @@
-package com.clone.scoutemove
+package com.bandaging
 
 import org.junit.Test
 

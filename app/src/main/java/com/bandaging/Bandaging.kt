@@ -1,8 +1,8 @@
-package com.clone.scoutemove
+package com.bandaging
 
 import android.app.Application
 
-class Scoutemove:Application() {
+class Bandaging:Application() {
     override fun onCreate() {
         super.onCreate()
     }

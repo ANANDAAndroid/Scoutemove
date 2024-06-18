@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.clone.scoutemove"
+    namespace = "com.bandaging"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.clone.scoutemove"
+        applicationId = "com.bandaging"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -40,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
@@ -67,4 +67,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     debugImplementation(libs.androidx.splashscreen)
+
 }

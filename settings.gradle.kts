@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Scoutemove"
+rootProject.name = "Bandaging"
 include(":app")
  

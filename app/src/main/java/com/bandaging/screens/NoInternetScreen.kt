@@ -1,4 +1,4 @@
-package com.clone.scoutemove.screens
+package com.bandaging.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
@@ -42,8 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.clone.scoutemove.R
-import com.clone.scoutemove.ui.theme.Purple40
+import com.bandaging.R
+import com.bandaging.ui.theme.Purple40
+import com.bandaging.ui.theme.Red
 
 
 @Composable
@@ -79,9 +80,9 @@ fun NoInternetScreen(onClick: () -> Unit) {
             onClick = { onClick() },
             modifier = Modifier
                 .fillMaxWidth(0.8f),
-            colors = ButtonDefaults.buttonColors().copy(containerColor = Color.Red)
+            colors = ButtonDefaults.buttonColors().copy(containerColor = Red)
         ) {
-            Text(text = "Try again")
+            Text(text = "Try again", fontWeight = FontWeight.Bold)
         }
     }
 

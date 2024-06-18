@@ -1,4 +1,4 @@
-package com.clone.scoutemove
+package com.bandaging
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,12 +10,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.clone.scoutemove.screens.NoInternetAnimatedDialog
-import com.clone.scoutemove.screens.NoInternetScreen
-import com.clone.scoutemove.screens.WebViewScreen
-import com.clone.scoutemove.ui.theme.ScoutemoveTheme
-import com.clone.scoutemove.utils.NetworkObserver
-import com.clone.scoutemove.utils.Status
+import com.bandaging.screens.NoInternetAnimatedDialog
+import com.bandaging.screens.NoInternetScreen
+import com.bandaging.screens.WebViewScreen
+import com.bandaging.ui.theme.BandagingTheme
+import com.bandaging.utils.NetworkObserver
+import com.bandaging.utils.Status
 
 class MainActivity : ComponentActivity() {
     private lateinit var networkObserver: NetworkObserver
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         networkObserver = NetworkObserver(applicationContext)
         setContent {
-            ScoutemoveTheme {
+            BandagingTheme {
                 var isWebViewScreen by rememberSaveable { mutableStateOf(false) }
                 var isShowDialog by rememberSaveable { mutableStateOf(false) }
                 var oneTime by rememberSaveable { mutableStateOf(true) }
@@ -41,8 +41,7 @@ class MainActivity : ComponentActivity() {
                     if (state.value != Status.AVAILABLE) isWebViewScreen = false
                 }
                 if (!isWebViewScreen) NoInternetScreen {
-                    if (state.value == Status.AVAILABLE) isWebViewScreen = true else isShowDialog =
-                        true
+                    if (state.value == Status.AVAILABLE) isWebViewScreen = true else isShowDialog = true
                 } else WebViewScreen()
 
                 NoInternetAnimatedDialog(visible = isShowDialog) {

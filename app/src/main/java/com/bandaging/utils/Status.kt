@@ -1,4 +1,4 @@
-package com.clone.scoutemove.utils
+package com.bandaging.utils
 
 enum class Status {
     AVAILABLE,
