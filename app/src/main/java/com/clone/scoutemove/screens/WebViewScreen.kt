@@ -7,17 +7,16 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Text
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.clone.scoutemove.utils.Constants
 
@@ -54,14 +53,9 @@ fun WebViewScreen(url: String = Constants.URL) {
         })
 
         if (loadingPercentage.intValue < 100 && shouldShowLoading.value) {
-            Text(
-                text = "Loading..." + loadingPercentage.intValue.toString() + "%",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(),
-                textAlign = TextAlign.Center,
-                fontSize = 16.sp
-            )
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(color = Color.Red)
+            }
         }else{
             LaunchedEffect(key1 = true){
                 shouldShowLoading.value = false

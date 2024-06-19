@@ -21,39 +21,46 @@ fun App(networkObserver: NetworkObserver, dataStore: DataStore<AppSettings>) {
         .collectAsState(initial = if (networkObserver.isActuallyConnected()) Status.AVAILABLE else Status.UNAVAILABLE)
     NavHost(navController = navController, startDestination = "parent") {
 
-        navigation(startDestination = "auth", route = "parent", enterTransition = {
+        navigation(startDestination = "login", route = "parent", enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
-                animationSpec = tween(300)
+                animationSpec = tween(200)
             )
         }, exitTransition = {
             slideOutOfContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
-                animationSpec = tween(300)
+                animationSpec = tween(200)
             )
         }, popEnterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Right,
-                animationSpec = tween(300)
+                animationSpec = tween(200)
             )
         },
             popExitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(300)
+                    animationSpec = tween(200)
                 )
             }) {
 
-            composable(route = "auth") {
-                AuthScreen(dataStore = dataStore) {
+            composable(route = "login") {
+                LoginScreen(dataStore = dataStore, onTextClick = {
+                    navController.navigate(route = "sign_up")
+                }) {
                     navController.navigate(route = "web_view") {
-                        popUpTo("auth") {
-                            inclusive = true
+                        popUpTo("login"){
+                            inclusive=true
                         }
                     }
                 }
             }
 
+            composable(route = "sign_up") {
+                SignUpScreen(dataStore = dataStore){
+                    navController.navigate(route = "login")
+                }
+            }
             composable(route = "web_view") {
                 MainScreen(state = state)
             }

@@ -16,7 +16,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject
     internal lateinit var networkObserver: NetworkObserver
-    private val protoDataStore by dataStore("settings.pb", AppSerializer)
+    private val protoDataStore by dataStore("settings.json", AppSerializer)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
