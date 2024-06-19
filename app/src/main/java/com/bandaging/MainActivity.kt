@@ -1,8 +1,6 @@
 package com.bandaging
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
@@ -11,9 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import com.bandaging.screens.NoInternetAnimatedDialog
 import com.bandaging.screens.NoInternetScreen
 import com.bandaging.screens.WebViewScreen
@@ -21,7 +17,6 @@ import com.bandaging.ui.theme.BandagingTheme
 import com.bandaging.utils.NetworkObserver
 import com.bandaging.utils.Status
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
