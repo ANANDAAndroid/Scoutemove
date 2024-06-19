@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.clone.scoutemove.utils.Status
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier, state: Status) {
+fun MainScreen( state: Status) {
 
     var isWebViewScreen by rememberSaveable { mutableStateOf(false) }
     var isShowDialog by rememberSaveable { mutableStateOf(false) }

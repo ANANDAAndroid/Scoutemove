@@ -25,9 +25,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.core.DataStore
+import com.clone.scoutemove.utils.AppSettings
 
 @Composable
- fun AuthScreen(onClick:()-> Unit) {
+fun AuthScreen(dataStore: DataStore<AppSettings>, onClick: () -> Unit) {
     var userName by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
     Column(
@@ -70,7 +72,10 @@ import androidx.compose.ui.unit.sp
             )
         )
         Button(
-            onClick = { onClick() }, modifier = Modifier
+            onClick = {
+
+                onClick()
+                      }, modifier = Modifier
                 .padding(top = 10.dp)
                 .fillMaxWidth()
                 .height(50.dp),

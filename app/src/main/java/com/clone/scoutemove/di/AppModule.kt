@@ -1,6 +1,7 @@
 package com.clone.scoutemove.di
 
 import android.content.Context
+import com.clone.scoutemove.utils.CryptoManager
 import com.clone.scoutemove.utils.NetworkObserver
 import dagger.Module
 import dagger.Provides
