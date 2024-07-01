@@ -11,16 +11,22 @@ object AppSerializer : Serializer<AppSettings> {
         get() = AppSettings()
 
     override suspend fun readFrom(input: InputStream): AppSettings {
-        return try {
-            val string = cryptoManager.decrypt(input)
-            Json.decodeFromString(
-                deserializer = AppSettings.serializer(),
-                string = string.decodeToString()
-            )
-        } catch (e: Exception) {
+
+        val string = cryptoManager.decrypt(input)
+        println("datastore ${string.decodeToString()}")
+        val abc=Json.decodeFromString(
+            deserializer = AppSettings.serializer(),
+            string = string.decodeToString()
+        )
+        println("datastore: $abc")
+
+        return  abc/*} try {
+
+        catch (e: Exception) {
             e.printStackTrace()
+            println("datastore: ")
             defaultValue
-        }
+        }*/
     }
 
     override suspend fun writeTo(t: AppSettings, output: OutputStream) {
